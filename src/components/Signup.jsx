@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify';
 
 function Signup() {
     const history=useNavigate();
@@ -13,29 +14,39 @@ function Signup() {
     const handleSubmit = async function submit(e){
         e.preventDefault();
 
-        try{
-
-            await axios.post("http://localhost:8000/signup",{
+         axios.post("http://localhost:8000/signup",{
                 username,email,password
             })
-            .then(res=>{
-                if(res.data==="exist"){
-                    alert("User already exists")
+            .then((response)=>{
+                if(response.data.message === "user exist"){
+                  toast.success('You have alredy signed up , now log!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  });
                 }
-                else if(res.data==="notexist"){
-                    history("/home",{state:{id:email}})
-                }
+               
             })
             .catch(e=>{
-                alert("wrong details")
-                console.log(e);
+              toast.success('You have successfully Signed up!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+              history("/login" );
             })
 
-        }
-        catch(e){
-            console.log(e);
-
-        }
+       
 
     }
   return (
@@ -45,8 +56,9 @@ function Signup() {
       <h2 class="text-3xl font-semibold text-gray-800 dark:text-white">Sign Up</h2>
       <p class="text-gray-600 dark:text-gray-400 mt-2">Please enter your details to create an account.</p>
     </div>
+    <form onSubmit={handleSubmit}>
     <div class="mt-8">
-        
+  
         
       <div class="flex flex-col space-y-4">
         <div>
@@ -110,6 +122,8 @@ function Signup() {
       >
        Sign Up
       </button>
+      </form>
+      
   </div>
 </div>
   )

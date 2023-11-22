@@ -12,8 +12,7 @@ function Login() {
     const handleSubmit = async function submit(e){
         e.preventDefault();  
 
-            axios
-    .post("http://localhost:8000/login", {
+            axios.post("http://localhost:8000/login", {
       email,
       password,
     })
@@ -116,7 +115,7 @@ function Login() {
         Forgot Password?
       </a>
       <a className="text-sm text-gray-600 dark:text-gray-400 hover:underline mt-4" href="/signup">
-        Already have an account? Log In
+        Don't have a account Sign Up
       </a>
       <button
         className="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-lg"

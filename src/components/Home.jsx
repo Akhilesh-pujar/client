@@ -26,7 +26,7 @@ function Home() {
     <div className="w-full h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
     <div className="text-center">
       <h1 className="text-5xl font-semibold text-gray-800 dark:text-white">Welcome, {username}</h1>
-      <p className="text-gray-600 dark:text-gray-400 mt-2">You are now logged in.</p>
+      <p className="text-gray-600 dark:text-gray-400 mt-2">You are now logged out click to login.</p>
       <button
         className="inline-flex items-center justify-center font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 w-full max-w-md mx-auto mt-8 bg-red-600 hover:bg-red-700 text-white py-2 rounded-md text-lg"
         type="button"
