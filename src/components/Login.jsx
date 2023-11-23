@@ -6,48 +6,19 @@ import { toast } from 'react-toastify';
 function Login() {
     const history=useNavigate();
 
-    const [email,setEmail]=useState('')
+    const [username,setusername]=useState('')
     const [password,setPassword]=useState('')
 
     const handleSubmit = async function submit(e){
         e.preventDefault();  
-
-            axios.post("http://localhost:8000/login", {
-      email,
+            axios.post("http://localhost:8000/api/login", {
+             
+      username,
       password,
     })
-    .then((response) => {
-      if (response.data.message === "Login successful") {
-        toast.success('You have successfully logged in!', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-
-        // Assuming you have access to the 'history' object
-        history("/", { state: { id: email } });
-      } else {
-        // Invalid credentials or other error
-        toast.error(response.data.message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
-    })
-    .catch((error) => {
-      // Network error or other unexpected issues
-      toast.error('An unexpected error occurred.', {
+    .then((response)=>{
+                
+      toast.success(response.data.message, {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -57,9 +28,22 @@ function Login() {
         progress: undefined,
         theme: "light",
       });
-
-      console.error(error);
-    });
+    
+    history("/",{state:{id:username}} );
+}) 
+.catch(e=>{
+  toast.error(e.response.data.message, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+ 
+})
 
         
       
@@ -89,9 +73,9 @@ function Login() {
             className="flex h-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 p-3 w-full bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:bg-white dark:focus:bg-gray-600"
             id="username"
             placeholder="Username"
-            required=""
+            required="true"
             type="text"
-            onChange={(e) => { setEmail(e.target.value) }}
+            onChange={(e) => { setusername(e.target.value) }}
           />
         </div>
         <div>

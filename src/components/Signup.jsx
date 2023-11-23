@@ -14,12 +14,12 @@ function Signup() {
     const handleSubmit = async function submit(e){
         e.preventDefault();
 
-         axios.post("http://localhost:8000/signup",{
+         axios.post("http://localhost:8000/api/register",{
                 username,email,password
             })
             .then((response)=>{
-                if(response.data.message === "user exist"){
-                  toast.success('You have alredy signed up , now log!', {
+                
+                  toast.success(response.data.message, {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -29,11 +29,11 @@ function Signup() {
                     progress: undefined,
                     theme: "light",
                   });
-                }
-               
-            })
+                
+                history("/login" );
+            }) 
             .catch(e=>{
-              toast.success('You have successfully Signed up!', {
+              toast.error(e.response.data.message, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -43,33 +43,33 @@ function Signup() {
                 progress: undefined,
                 theme: "light",
               });
-              history("/login" );
+             
             })
 
        
 
     }
   return (
-<div class="w-full h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-  <div class="w-full max-w-md mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
-    <div class="text-center">
-      <h2 class="text-3xl font-semibold text-gray-800 dark:text-white">Sign Up</h2>
-      <p class="text-gray-600 dark:text-gray-400 mt-2">Please enter your details to create an account.</p>
+<div className="w-full h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+  <div className="w-full max-w-md mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+    <div className="text-center">
+      <h2 className="text-3xl font-semibold text-gray-800 dark:text-white">Sign Up</h2>
+      <p className ="text-gray-600 dark:text-gray-400 mt-2">Please enter your details to create an account.</p>
     </div>
     <form onSubmit={handleSubmit}>
     <div class="mt-8">
   
         
-      <div class="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4">
         <div>
           <label
-            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-gray-200"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-gray-200"
             for="username"
           >
             Username
           </label>
           <input
-            class="flex h-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 p-3 w-full bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:bg-white dark:focus:bg-gray-600"
+            className="flex h-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 p-3 w-full bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:bg-white dark:focus:bg-gray-600"
             id="username"
             placeholder="Username"
             required="true"
@@ -79,13 +79,13 @@ function Signup() {
         </div>
         <div>
           <label
-            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-gray-200"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-gray-200"
             for="email"
           >
             Email
           </label>
           <input
-            class="flex h-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 p-3 w-full bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:bg-white dark:focus:bg-gray-600"
+            className="flex h-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 p-3 w-full bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:bg-white dark:focus:bg-gray-600"
             id="email"
             placeholder="Email"
             required="true"
@@ -95,13 +95,13 @@ function Signup() {
         </div>
         <div>
           <label
-            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-gray-200"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700 dark:text-gray-200"
             for="password"
           >
             Password
           </label>
           <input
-            class="flex h-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 p-3 w-full bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:bg-white dark:focus:bg-gray-600"
+            className="flex h-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 p-3 w-full bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:bg-white dark:focus:bg-gray-600"
             id="password"
             placeholder="Password"
             required="true"
