@@ -14,7 +14,7 @@ function Signup() {
     const handleSubmit = async function submit(e){
         e.preventDefault();
 
-         axios.post("https://ap-south-1.aws.data.mongodb-api.com/app/data-dwprt/endpoint/data/v1",{
+         axios.post(process.env.MONGODB_ENDPOINT,{
                 username,email,password
             })
             .then((response)=>{
