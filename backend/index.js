@@ -11,7 +11,11 @@ dotenv.config();
 const app = express();
 
 // Enable CORS if your frontend is on a different domain
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+};
+
+app.use(cors(corsOptions));
 const uri = process.env.MONGODB_URI;
 
 // Connect to MongoDB Atlas

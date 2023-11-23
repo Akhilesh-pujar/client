@@ -11,7 +11,12 @@ function Login() {
 
     const handleSubmit = async function submit(e){
         e.preventDefault();  
-            axios.post(`${process.env.REACT_AP_API}/api/login`, {
+        console.log(`${process.env.REACT_APP_API}/api/login`, {
+             
+          username,
+          password,
+        })
+      axios.post(`${process.env.REACT_APP_API}/api/login`, {
              
       username,
       password,
