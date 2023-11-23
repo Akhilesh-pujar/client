@@ -14,7 +14,7 @@ function Signup() {
     const handleSubmit = async function submit(e){
         e.preventDefault();
 
-         axios.post("http://localhost:8000/api/register",{
+         axios.post(`${process.env.REACT_AP_API}/api/register`,{
                 username,email,password
             })
             .then((response)=>{
