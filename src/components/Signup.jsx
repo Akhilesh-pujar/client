@@ -14,7 +14,7 @@ function Signup() {
     const handleSubmit = async function submit(e){
         e.preventDefault();
 
-         axios.post("http://localhost:8000/api/register",{
+         axios.post("https://client-tawny-iota.vercel.app/api/signup",{
                 username,email,password
             })
             .then((response)=>{
