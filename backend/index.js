@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const dotenv = require("dotenv");
-
+const { Schema } = mongoose;
 dotenv.config();
 
 const app = express();
@@ -18,11 +18,15 @@ const uri = process.env.MONGODB_URI;
 mongoose.connect(uri);
 
 // Define a MongoDB User model
-const User = mongoose.model('User', {
-  username:String,
+const User = mongoose.model('User',new Schema({
+  username: {
+    type: String,
+    required: true,
+  },
   email: String,
-  password: String,
-});
+  password: String
+
+}));
 
 app.use(express.json());
 

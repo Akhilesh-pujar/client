@@ -14,7 +14,7 @@ function Signup() {
     const handleSubmit = async function submit(e){
         e.preventDefault();
 
-         axios.post(process.env.MONGODB_ENDPOINT,{
+         axios.post("http://localhost:8000/api/register",{
                 username,email,password
             })
             .then((response)=>{
