@@ -14,7 +14,7 @@ function Signup() {
     const handleSubmit = async function submit(e){
         e.preventDefault();
 
-         axios.post("https://client-tawny-iota.vercel.app/api/signup",{
+         axios.post("mongodb+srv://akhilesh:Y0hnLOfM8jh7fiqo@cluster0.xkcpzov.mongodb.net/?retryWrites=true&w=majority/api/signup",{
                 username,email,password
             })
             .then((response)=>{
