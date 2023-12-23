@@ -100,6 +100,10 @@ app.post('/api/login', async (req, res) => {
     return res.status(500).json({ message: 'An unexpected error occurred' });
   }
 });
+// app.get("api/forgotpassword",async(req,res)=>{
+//     const { password} = req.body;
+
+// })
 
 const PORT = process.env.PORT || 8000;
 

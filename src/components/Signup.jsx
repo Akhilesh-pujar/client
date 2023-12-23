@@ -9,13 +9,13 @@ function Signup() {
     const [email,setEmail]=useState('')
     const [username,setusername]=useState({})
     const [password,setPassword]=useState('')
-    const [role, setRole] = useState('user');
+    const [role, setRole] = useState('');
 
 
     const handleSubmit = async function submit(e){
         e.preventDefault();
 
-         axios.post(`${process.env.REACT_APP_API}/api/register?role=Admin`,{
+         axios.post(`${process.env.REACT_APP_API}/api/register`,{
                 username,email,password,role
             })
             .then((response)=>{
@@ -119,8 +119,8 @@ function Signup() {
           </label>
         <select className='flex h-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 p-2 w-full bg-gray-100 dark:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500
          focus:outline-none focus:bg-white dark:focus:bg-gray-600' value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
+          <option value="User">User</option>
+          <option value="Admin">Admin</option>
         </select>
 
         </div>
