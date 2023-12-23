@@ -2,12 +2,15 @@ import React from 'react'
 import {useLocation} from 'react-router-dom';
 import { useNavigate } from "react-router-dom"
 import {  toast } from 'react-toastify';
+import Navbar from './Navbar';
 
 
 function Home() {
     const location = useLocation()
     
     const username = location.state ? location.state.id:null;
+    const role = location.state ? location.state.role:null;
+    
     const navigate = useNavigate();
     const handlelogout= ()=>{
       toast.success('Logged out successfully!', {
@@ -23,9 +26,13 @@ function Home() {
       navigate('/login')}
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+    <div className='container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center bg-gray-100 dark:bg-gray-900'>
+       <Navbar/>
+       <div className="w-full h-screen flex items-center justify-center ">
+     
     <div className="text-center">
-      <h1 className="text-5xl font-semibold text-gray-800 dark:text-white"> Welcome, {username ? username : 'register/login app'}</h1>
+    
+      <h1 className="text-5xl font-semibold text-gray-800 dark:text-white"> Welcome, {username ? username : 'register/login app'} {role?role:" "}</h1>
       
       {username ? (
           // If user is logged in, show Log Out button
@@ -66,6 +73,9 @@ function Home() {
         )}
     </div>
   </div>
+
+    </div>
+   
   )
 }
 

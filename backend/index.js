@@ -28,7 +28,18 @@ const User = mongoose.model('User',new Schema({
     required: true,
   },
   email: String,
-  password: String
+  password: String,
+  role: String
+
+}));
+const Admin = mongoose.model('Admin',new Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  email: String,
+  password: String,
+  role: String
 
 }));
 
@@ -36,12 +47,21 @@ app.use(express.json());
 
 // Register endpoint
 app.post('/api/register', async (req, res) => {
-  const { username,email, password } = req.body;
+  const { username,email, password,role } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username,email, password: hashedPassword });
-    await user.save();
+    if(role === 'Admin' && role ==='admin'){
+      const admin = new Admin ({username,email,password:hashedPassword,role})
+      await admin.save();
+    }
+    else{
+      const user = new User({ username,email, password: hashedPassword,role })
+      await user.save();
+
+    }
+    
+   
     res.status(201).json({ message: 'Registration successful' });
   } catch (error) {
     console.error(error);
@@ -51,22 +71,30 @@ app.post('/api/register', async (req, res) => {
 
 // Login endpoint
 app.post('/api/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, role } = req.body;
 
   try {
-    const user = await User.findOne({ username });
+    let userModel, roleModel;
 
-    if (!user) {
-      return res.status(401).json({ message: 'User Not Found' });
+    if (role === 'Admin') {
+      userModel = Admin;
+      roleModel = 'Admin';
+    } else {
+      userModel = User;
+      roleModel = 'User';
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const user = await userModel.findOne({ username });
+    if (!user) {
+      return res.status(401).json({ message: `${roleModel} Not Found` });
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password,);
 
     if (!passwordMatch) {
       return res.status(401).json({ message: 'Invalid Password' });
     }
 
-    return res.status(200).json({ message: 'Login successful' });
+    return res.status(200).json({ message: `${roleModel} Login successful` });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'An unexpected error occurred' });
